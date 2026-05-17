@@ -1,132 +1,12 @@
+import CSS from './style.css';
+
 const HTML = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>nanobanana</title>
-  <style>
-    :root {
-      --bg: #f8f9fa;
-      --surface: #ffffff;
-      --border: #d0d0d0;
-      --text: #111111;
-      --text-muted: #666666;
-      --accent: #c9920a;
-      --accent-btn-text: #111111;
-    }
-    [data-theme="dark"] {
-      --bg: #0a0a0a;
-      --surface: #1a1a1a;
-      --border: #333333;
-      --text: #f0f0f0;
-      --text-muted: #888888;
-      --accent: #f5c542;
-      --accent-btn-text: #0a0a0a;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 2rem 1rem;
-      transition: background 0.2s, color 0.2s;
-    }
-    h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
-    h1 span { color: var(--accent); }
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      width: 100%;
-      max-width: 640px;
-    }
-    textarea {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text);
-      font-size: 1rem;
-      resize: vertical;
-      min-height: 80px;
-    }
-    textarea:focus { outline: none; border-color: var(--accent); }
-    .row { display: flex; gap: 0.75rem; }
-    select {
-      flex: 1;
-      padding: 0.6rem 0.75rem;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text);
-      font-size: 0.9rem;
-    }
-    button[type="submit"] {
-      flex: 1;
-      padding: 0.7rem 1.5rem;
-      border-radius: 8px;
-      border: none;
-      background: var(--accent);
-      color: var(--accent-btn-text);
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    button[type="submit"]:disabled { opacity: 0.5; cursor: not-allowed; }
-    .upload-area {
-      border: 1.5px dashed var(--border);
-      border-radius: 8px;
-      padding: 1rem;
-      text-align: center;
-      cursor: pointer;
-      transition: border-color 0.15s;
-      position: relative;
-    }
-    .upload-area:hover, .upload-area.drag { border-color: var(--accent); }
-    .upload-area input[type="file"] {
-      position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
-    }
-    .upload-area p { font-size: 0.85rem; color: var(--text-muted); pointer-events: none; }
-    .upload-area p span { color: var(--accent); }
-    #preview-wrap {
-      display: none;
-      position: relative;
-      margin-top: 0.5rem;
-    }
-    #preview-wrap img { width: 100%; max-height: 160px; object-fit: cover; border-radius: 6px; }
-    #clear-btn {
-      position: absolute;
-      top: 6px; right: 6px;
-      background: rgba(0,0,0,0.5);
-      border: none;
-      border-radius: 50%;
-      color: #fff;
-      width: 24px; height: 24px;
-      font-size: 14px;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-    }
-    #status { font-size: 0.85rem; color: var(--text-muted); text-align: center; min-height: 1.2em; }
-    #result { margin-top: 1.5rem; width: 100%; max-width: 640px; }
-    #result img { width: 100%; border-radius: 10px; display: none; }
-    #theme-toggle {
-      position: fixed;
-      top: 1rem; right: 1rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      color: var(--text);
-      padding: 0.35rem 0.6rem;
-      font-size: 1rem;
-      cursor: pointer;
-      line-height: 1;
-    }
-  </style>
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <button id="theme-toggle" type="button" aria-label="Toggle theme">🌙</button>
@@ -264,6 +144,10 @@ export default {
 
     if (url.pathname === '/') {
       return new Response(HTML, {headers: {'Content-Type': 'text/html;charset=UTF-8'}});
+    }
+
+    if (url.pathname === '/style.css') {
+      return new Response(CSS, {headers: {'Content-Type': 'text/css;charset=UTF-8'}});
     }
 
     if (url.pathname === '/generate' && request.method === 'POST') {
