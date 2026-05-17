@@ -28,3 +28,11 @@ repos:
   rev: v1.44.0
   hooks:
   - id: typos
+
+- repo: local
+  hooks:
+  - id: eslint
+    name: eslint
+    entry: npx --no-install eslint --fix
+    language: system
+    files: \.(ts|js|mjs)$

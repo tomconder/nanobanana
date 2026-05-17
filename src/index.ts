@@ -221,7 +221,7 @@ export default {
     }
 
     if (url.pathname === "/generate" && request.method === "POST") {
-      const body = await request.json() as {
+      const body = (await request.json()) as {
         prompt: string;
         aspect_ratio: string;
         resolution: string;
@@ -238,10 +238,18 @@ export default {
         params.image_input = [body.image_base64];
       }
 
-      const response = await env.AI.run("google/nano-banana-2", params as Parameters<Env["AI"]["run"]>[1]);
+      const response = await env.AI.run(
+        "google/nano-banana-2",
+        params as Parameters<Env["AI"]["run"]>[1]
+      );
       const { result } = response as unknown as { result: { image: string } };
       const imageResponse = await fetch(result.image);
-      const contentType = output_format === "png" ? "image/png" : output_format === "webp" ? "image/webp" : "image/jpeg";
+      const contentType =
+        output_format === "png"
+          ? "image/png"
+          : output_format === "webp"
+            ? "image/webp"
+            : "image/jpeg";
 
       return new Response(imageResponse.body, { headers: { "Content-Type": contentType } });
     }
