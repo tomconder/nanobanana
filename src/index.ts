@@ -216,11 +216,11 @@ export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
 
-    if (url.pathname === "/") {
-      return new Response(HTML, { headers: { "Content-Type": "text/html;charset=UTF-8" } });
+    if (url.pathname === '/') {
+      return new Response(HTML, {headers: {'Content-Type': 'text/html;charset=UTF-8'}});
     }
 
-    if (url.pathname === "/generate" && request.method === "POST") {
+    if (url.pathname === '/generate' && request.method === 'POST') {
       const body = (await request.json()) as {
         prompt: string;
         aspect_ratio: string;
@@ -229,31 +229,31 @@ export default {
         image_base64?: string;
       };
 
-      const { prompt, aspect_ratio, resolution } = body;
-      const output_format = (body.output_format ?? "jpg") as "jpg" | "png" | "webp";
+      const {prompt, aspect_ratio, resolution} = body;
+      const output_format = (body.output_format ?? 'jpg') as 'jpg' | 'png' | 'webp';
 
-      const params: Record<string, unknown> = { prompt, aspect_ratio, resolution, output_format };
+      const params: Record<string, unknown> = {prompt, aspect_ratio, resolution, output_format};
 
       if (body.image_base64) {
         params.image_input = [body.image_base64];
       }
 
       const response = await env.AI.run(
-        "google/nano-banana-2",
-        params as Parameters<Env["AI"]["run"]>[1]
+          'google/nano-banana-2',
+        params as Parameters<Env['AI']['run']>[1],
       );
-      const { result } = response as unknown as { result: { image: string } };
+      const {result} = response as unknown as { result: { image: string } };
       const imageResponse = await fetch(result.image);
       const contentType =
-        output_format === "png"
-          ? "image/png"
-          : output_format === "webp"
-            ? "image/webp"
-            : "image/jpeg";
+        output_format === 'png' ?
+          'image/png' :
+          output_format === 'webp' ?
+            'image/webp' :
+            'image/jpeg';
 
-      return new Response(imageResponse.body, { headers: { "Content-Type": contentType } });
+      return new Response(imageResponse.body, {headers: {'Content-Type': contentType}});
     }
 
-    return new Response("Not found", { status: 404 });
+    return new Response('Not found', {status: 404});
   },
 };

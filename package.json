@@ -6,7 +6,9 @@
 		"format": "eslint --fix src"
 	},
 	"devDependencies": {
+		"@eslint/eslintrc": "^3.3.5",
 		"eslint": "^10.4.0",
+		"eslint-config-google": "^0.14.0",
 		"typescript-eslint": "^8.59.3",
 		"wrangler": "^4.91.0"
 	}
