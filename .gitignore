@@ -1,6 +1,8 @@
 node_modules/
 .wrangler/
 worker-configuration.d.ts
+.env
+.env.*
 *.jpg
 *.png
 *.webp

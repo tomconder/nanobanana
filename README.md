@@ -34,11 +34,7 @@ The `--remote` flag is required so the AI binding can reach Cloudflare's inferen
 npx wrangler deploy
 ```
 
-## Usage
-
-Open the deployed URL in a browser. Enter a prompt, optionally upload a reference image, choose an aspect ratio and resolution, and click **Generate**.
-
-The image endpoint is also accessible directly:
+## API
 
 ```
 POST /generate
@@ -51,9 +47,13 @@ Content-Type: application/json
 }
 ```
 
-An optional `image_base64` field accepts a base64-encoded reference image.
+Optional: include `image_base64` (base64-encoded) as a reference image for style/content guidance.
+
+Returns the generated image as `image/jpeg` (or `image/png` / `image/webp` if `output_format` is specified).
 
 ## Pre-commit hooks
+
+Runs secret scanning (gitleaks, detect-private-key, detect-aws-credentials), ESLint, typo checking, and basic file hygiene.
 
 ```bash
 pip install pre-commit
