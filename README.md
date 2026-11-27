@@ -1,6 +1,6 @@
 # nanobanana
 
-A Cloudflare Worker that generates images from text prompts using Google's [nano-banana-2](https://developers.cloudflare.com/ai/models/google/nano-banana-2/) model via [Workers AI](https://developers.cloudflare.com/workers-ai/).
+A Cloudflare Worker that generates images from text prompts using Google's [nano-banana-2.1](https://developers.cloudflare.com/ai/models/google/nano-banana-2.1/) model via [Workers AI](https://developers.cloudflare.com/workers-ai/).
 
 ## Features
 
