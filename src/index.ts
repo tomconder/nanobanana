@@ -169,7 +169,7 @@ export default {
       }
 
       const response = await env.AI.run(
-          'google/nano-banana-2',
+          'google/nano-banana-2.1',
         params as Parameters<Env['AI']['run']>[1],
       );
       const {result} = response as unknown as { result: { image: string } };
